@@ -44,7 +44,16 @@ CREATE TABLE  MENUS (
 INSERT INTO  MENUS VALUES ('MENU01','JAVA', 1);
 COMMIT;
 
-
+---------------------------------------------------------------------------
+--회원 정보
+CREATE TABLE TUSER (
+    USERID VARCHAR2(12) PRIMARY KEY
+    ,PWD VARCHAR2(12) NOT NULL
+    ,USERNAME VARCHAR2(100) NOT NULL
+    ,EMAIL VARCHAR2(320)
+    ,UPOINT NUMBER(9) DEFAULT 0
+    ,REGDATE DATE DEFAULT SYSDATE
+);
 
 
 
