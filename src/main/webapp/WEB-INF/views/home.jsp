@@ -12,12 +12,9 @@
 </head>
 <body>
   <main>
-    <h2>UserInfo</h2>
-    <div><a href=""></a></div>
-    <div><a href=""></a></div>
+    <h2>User .Info</h2>
     <div><a href="/Users/List">회원목록</a></div>  
-    <div><a href="">회원 삭제</a></div>
+    <div><a href="/Users/WriteForm">회원추가</a></div>  
   </main>
-  
 </body>
 </html>

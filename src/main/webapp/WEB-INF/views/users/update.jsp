@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>write</title>
+<title>update</title>
 <link href="/img/favicon.ico" rel="shortcut icon" type="image/x-icon">
 <link href="/css/common.css" rel="stylesheet" /> 
 <style>
@@ -24,51 +24,41 @@
 		background-color: white;
 		border: 1px solid black;
 	}
-	input[type=text], input[type=number] {
+	input[type=text], input[type=number], input[type=password] {
 		width: 100%;
 	}
 	input[type=submit], input[type=button] {
 		width: 100px;
 	}
-	input[type=password] {
-		width: 100%
-	}
 </style>
 </head>
 <body>
 	<main>
-		<h2>회원 등록</h2>
-		<form action="/Users/Write" method="get">
+		<h2>회원 수정</h2>
+		<form action="/Users/Update" method="get">
 		  <table>
 		    <tr>
 		      <td>회원 아이디</td>
-		      <td><input type="text" name="userid"  /></td>
+		      <!-- readonly : 변경 불가능 -->
+		      <td><input type="text" name="userid" value="${user.userid}" readonly/></td>
 		    </tr>
-		    <tr>
-		      <td>회원 비밀번호</td>
-		      <td><input type="password" name="pwd"  /></td>
+   		    <tr>
+		      <td>회원 암호</td>
+		      <td><input type="password" name="pwd" value="${user.pwd}" /></td>
 		    </tr>
 		    <tr>
 		      <td>회원 이름</td>
-		      <td><input type="text" name="username" /></td>
+		      <td><input type="text" name="username" value="${user.username}" /></td>
 		    </tr>
 		    <tr>
-   		      <td>회원 이메일</td>
-		      <td><input type="text" name="email" /></td>
-		    </tr>
-		    <tr>
-   		      <td>회원 포인트</td>
-		      <td><input type="number" name="upoint" /></td>
-		    </tr>
-		    <tr>
-   		      <td>회원 등록일</td>
-		      <td><input type="text" name="regdate" /></td>
+		      <td>이메일</td>
+		      <td><input type="text" name="email" value="${user.email}" /></td>
 		    </tr>
 		    <tr>
 		      <td colspan="2">
-		      	<input type="submit" value="추가" />
+		      	<input type="submit" value="수정" />
 		      	<input type="button" value="목록" 
-		      	onclick="window.location.href='/Users/List'"/>
+		      	onclick="window.location.href='/Users/List'" />
 		      </td>
 		    </tr>
 		  </table>

@@ -33,32 +33,29 @@
 	  <h2>회원 목록 ${msg}</h2>
 	  <table>
 	  	<tr>
-		  <td>userid</td>
-  		  <td>pwd</td>
-  		  <td>username</td>
-  		  <td>email</td>
-  		  <td>upoint</td>
-  		  <td>regdate</td>
+		  <td>회원ID</td>
+  		  <td>회원이름</td>
+  		  <td>이메일</td>
+  		  <td>회원 포인트</td>
+  		  <td>등록일</td>
   		  <td>삭제</td>
   		  <td>목록</td>
 	  	</tr>
 		  <tr>
  		    <td colspan="5">
  			    [<a href="/Users/WriteForm">회원등록</a>]&nbsp;&nbsp;&nbsp;
- 			    [<a href="">회원등록2</a>]&nbsp;&nbsp;&nbsp;
  			    [<a href="/">Home</a>]
  		    </td>
 	  	</tr>
 	  	<c:forEach var="user" items="${userList}">
 		  	<tr>
 	  		  <td>${ user.userid }</td>
-	  		  <td>${ user.pwd }</td>
 	  		  <td>${ user.username }</td>
 	  		  <td>${ user.email }</td>
 	  		  <td>${ user.upoint }</td>
 	  		  <td>${ user.regdate }</td>
-	  		  <td><a href="">삭제</a></td>
-	  		  <td><a href="">수정</a></td>
+	  		  <td><a href="/Users/Delete?userid=${ user.userid }">삭제</a></td>
+	  		  <td><a href="/Users/UpdateForm?userid=${user.userid}">수정</a></td>
 		  	</tr>
 	  	</c:forEach>
 	  </table>
