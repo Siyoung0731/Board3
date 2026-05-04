@@ -13,10 +13,14 @@ public interface UserMapper {
 	List<UserDto> getUserList();
 
 	void insertUser(UserDto dto);
+	
+	void insertUser2(UserDto dto);
 
 	void deleteUser(UserDto dto);
 
 	void updateUser(UserDto dto);
 
 	UserDto getUser(UserDto dto);
+
+	UserDto getIdDupCheck(UserDto dto);
 }

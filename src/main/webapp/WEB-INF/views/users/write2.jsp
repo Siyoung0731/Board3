@@ -30,16 +30,23 @@
 	input[type=submit], input[type=button] {
 		width: 100px;
 	}
+	input[name=usreid] {
+		width: 65%;
+	}
 </style>
 </head>
 <body>
 	<main>
 		<h2>사용자 등록 ${msg} </h2>
-		<form action="/Users/Write2" method="get">
+		<form action="/Users/Write2" method="post">
 		  <table>
 		    <tr>
 		      <td><span class="red">*</span>아이디</td>
-		      <td><input type="text" name="userid"  /></td>
+		      <td>
+		      	<input type="text" name="userid"  />
+		      	<input type="button" id="dupCheck1" value="중복확인(새창)">
+		      	<input type="button" id="dupCheck2" value="중복확인(Ajax)">
+		      </td>
 		    </tr>
 		    <tr>
 		      <td><span class="red">*</span>비밀번호</td>
@@ -69,12 +76,16 @@
 	</main>
 	<!-- JavaScript 코딩 : client validation -->
 	<script>
+		var idDupChecked = false;
+		
 		const formEl = document.querySelector('form');	
 		const useridEl = document.querySelector('[name="userid"]');	
-		const pwdoldEl = document.querySelector('#pwdold');	
 		const pwdEl = document.querySelector('#pwd');	
 		const pwd2El = document.querySelector('#pwd2');	
 		const usernameEl = document.querySelector('[name="username"]');	
+		
+			
+		// 입력항목 체크
 		formEl.addEventListener('submit', function(e){
 			
 			// 아이디값 체크
@@ -85,22 +96,13 @@
 				e.stopPropagation() // Event 버블링 방지
 				return;
 			} 
-			// 옛날비밀번호 입력 체크
-			if(pwdoldEl.value.trim() == ''){
-				alert('옛날 비밀번호를 입력하세요')
-				pwdoldEl.focus();
-				e.preventDefault() // Event 취소
-				e.stopPropagation() // Event 버블링 방지
+			// 아이디 중복확인 여부 체크
+			if(!idDupChecked) {
+				alert('아이디 중복확인을 하세요')
+				e.preventDefault()
+				e.stopPropagation()
 				return;
-			} 
-			// 옛날비밀번호 != 조회된 비밀번호 user.pwd 체크(실무 사용 안함)
-			if(pwdoldEl.value != '${user.pwd}'){
-				alert('현재 비밀번호와 일치하지 않습니다.')
-				pwdoldEl.focus();
-				e.preventDefault() // Event 취소
-				e.stopPropagation() // Event 버블링 방지
-				return;
-			} 
+			}
 			// 비밀번호 값 체크
 			if(pwdEl.value.trim() == ''){
 				alert('비밀번호를 입력하세요')
@@ -134,6 +136,46 @@
 				return;
 			}
 		});
+	</script>
+	<script>
+		//아이디 중복확인1(새창 열기)
+		const btnDup1El = document.querySelector('#dupCheck1')
+		btnDup1El.addEventListener('click', function() {
+			// 새창(브라우저) 열기
+			let url = '/Users/IdCheckWindow';
+			let target = 'IdCheck'; //새 창 이름
+			let feature = 'left=800, top=200, width=400, height=300';
+			window.open(url, target, feature)
+		})	
+	</script>
+	<script>
+		//아이디 중복확인2(Ajax)
+		const btnDup2El = document.querySelector('#dupCheck2')
+		
+		btnDup2El.addEventListener('click', function() {
+			if(useridEl.value.trim() == ''){
+				alert('아이디를 입력하세요.')
+				useridEl.focus()
+				return;
+			}
+			let url = '/Users/IdDupCheck2?userid=' + useridEl.value;
+			fetch(url)
+			.then(response => response.json())
+			.then(data =>  {
+				console.log(data)
+				if(data.userid != null)
+					alert('사용 불가능')
+					idDupChecked = false;
+				else
+					alert('사용 가능')
+					idDupChecked = true;
+			});	
+		})
+		
+		//userid 의 value 가 바뀌면 idDupChecked = false;
+		useridEl.addEventListener('change', function() {
+			idDupChecked = false;
+		})
 	</script>
 </body>
 </html>

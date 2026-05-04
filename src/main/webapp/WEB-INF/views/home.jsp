@@ -15,6 +15,7 @@
     <h2>User .Info</h2>
     <div><a href="/Users/List">회원목록</a></div>  
     <div><a href="/Users/WriteForm">회원추가</a></div>  
+    <div><a href="/Users/WriteForm2">사용자 등록</a></div>
   </main>
 </body>
 </html>

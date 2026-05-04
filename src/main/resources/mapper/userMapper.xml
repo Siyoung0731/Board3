@@ -33,6 +33,10 @@
 		INSERT INTO TUSER(USERID, PWD, USERNAME, EMAIL, UPOINT, REGDATE)
 		VALUES( #{ userid }, #{ pwd }, #{ username }, #{ email }, #{ upoint }, #{ regdate })
 	</insert>
+	<insert id="insertUser2">
+		INSERT INTO TUSER(USERID, PWD, USERNAME, EMAIL)
+		VALUES( #{ userid }, #{ pwd }, #{ username }, #{ email })
+	</insert>
 	<!-- user delete -->
 	<delete id="deleteUser">
 		DELETE FROM TUSER WHERE USERID = #{ userid }
@@ -42,4 +46,15 @@
 		UPDATE TUSER SET USERNAME = #{username}, PWD = #{pwd}, EMAIL = #{email}
 		WHERE USERID = #{userid}
 	</update>
+	<!-- 아이디 중복 확인 -->
+	<select id="getIdDupCheck2">
+		SELECT USERID
+		FROM TUSER
+		WHERE USERID = #{userid}
+	</select>
+	<select id="getIdDupCheck1">
+		SELECT USERID, PWD, USERNAME, EMAIL, UPOINT, REGDATE
+		FROM TUSER
+		WHERE USERID = #{userid}
+	</select>
 </mapper>
